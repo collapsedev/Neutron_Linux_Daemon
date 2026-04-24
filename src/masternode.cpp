@@ -194,7 +194,7 @@ void ProcessMessageMasternode(CNode* pfrom, std::string& strCommand, CDataStream
             msg << boost::format("%s : dsee - got mismatched pubkey and vin") % __func__;
 
             LogPrintf("%s\n", msg.str().c_str());
-            pfrom->Misbehaving(msg.str(), 100);
+            pfrom->Misbehaving(msg.str(), 1);
             return;
         }
 
