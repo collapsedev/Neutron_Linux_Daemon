@@ -109,12 +109,9 @@ bool IsInitialBlockDownload()
         nLastUpdate = GetTime();
     }
 
-    if (GetTime() - nLastUpdate <= MAX_INACTIVITY_IBD)
+    // Clear initial download conditions
+    if (pindexBest->GetBlockTime() < (GetTime() - nMaxTipAge))
     {
-        if (GetTime() - nLastUpdate < 15 && pindexBest->GetBlockTime() < (GetTime() - nMaxTipAge))
-            return true;
-
-        if (pindexBest->GetBlockTime() < (GetTime() - nMaxTipAge))
             return true;
     }
 
