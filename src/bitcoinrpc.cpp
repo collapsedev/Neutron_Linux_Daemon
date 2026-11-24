@@ -859,7 +859,7 @@ static void RPCListen(boost::shared_ptr< basic_socket_acceptor<Protocol> > accep
                       ssl::context& context, const bool fUseSSL)
 {
     // Accept connection
-    AcceptedConnectionImpl<Protocol>* conn = new AcceptedConnectionImpl<Protocol>((boost::asio::io_context&)(acceptor->get_executor().context(), context, fUseSSL);
+    AcceptedConnectionImpl<Protocol>* conn = new AcceptedConnectionImpl<Protocol>(static_cast<boost::asio::io_context&>(acceptor->get_executor().context()), context, fUseSSL);
     acceptor->async_accept(conn->sslStream.lowest_layer(), conn->peer,
                            boost::bind(&RPCAcceptHandler<Protocol>, acceptor,
                            boost::ref(context), fUseSSL, conn,
